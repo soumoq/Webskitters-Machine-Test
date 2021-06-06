@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.webskitters.webskitters_machine_test.retrofit.ImageService
 import com.webskitters.webskitters_machine_test.retrofit.RestApiServiceBuilder
 import com.webskitters.webskitters_machine_test.util.toast
+import com.webskitters.webskitters_machine_test.view.dialog.ProgressDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,12 +16,17 @@ import retrofit2.Response
 class ImageViewModel : ViewModel() {
     val imageList = MutableLiveData<List<ImageModel>>()
 
-    private val languageService = RestApiServiceBuilder().buildService(ImageService::class.java)
 
     fun getImage(context: Context){
+        val progressDialog = ProgressDialog(context)
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+
+        val languageService = RestApiServiceBuilder().buildService(ImageService::class.java)
         val response: Call<List<ImageModel>> = languageService.getLanguage()
         response.enqueue(object : Callback<List<ImageModel>> {
             override fun onResponse(call: Call<List<ImageModel>>, response: Response<List<ImageModel>>) {
+                progressDialog.dismiss()
                 if (response.isSuccessful) {
                     imageList.value = response.body()
                 } else {
@@ -29,6 +35,7 @@ class ImageViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<List<ImageModel>>, t: Throwable) {
+                progressDialog.dismiss()
                 Log.e("LogTag", "onFailure: ")
                 context.toast("Something went wrong!!")
             }
