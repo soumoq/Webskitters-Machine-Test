@@ -1,0 +1,2 @@
+rootProject.name = "Webskitters_Test"
+include ':app'
