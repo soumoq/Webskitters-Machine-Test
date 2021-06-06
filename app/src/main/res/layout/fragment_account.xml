@@ -8,8 +8,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:text="Account Fragment"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:gravity="center"
-        android:text="Home Fragment"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+        />
 
 </FrameLayout>

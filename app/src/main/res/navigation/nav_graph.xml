@@ -11,8 +11,20 @@
         android:label="Home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/dashboardFragment"
-        android:name="com.webskitters.webskitters_machine_test.view.fragment.DashboardFragment"
-        android:label="Dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/mapFragment"
+        android:name="com.webskitters.webskitters_machine_test.view.fragment.MapFragment"
+        android:label="Map"
+        tools:layout="@layout/fragment_map" />
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.webskitters.webskitters_machine_test.view.fragment.AccountFragment"
+        android:label="Account"
+        tools:layout="@layout/fragment_account"/>
+
+    <!--    <fragment-->
+<!--        android:id="@+id/accountFragment"-->
+<!--        android:name="com.webskitters.webskitters_machine_test.view.fragment.AccountFragment"-->
+<!--        android:label="Account"-->
+<!--        tools:layout="@layout/fragment_account" />-->
+
 </navigation>

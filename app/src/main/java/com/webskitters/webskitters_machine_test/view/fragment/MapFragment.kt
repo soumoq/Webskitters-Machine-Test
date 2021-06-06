@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.webskitters.webskitters_machine_test.R
 
-class DashboardFragment : Fragment() {
+class MapFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view : View = inflater.inflate(R.layout.fragment_dashboard, container, false)
+        val view : View = inflater.inflate(R.layout.fragment_map, container, false)
 
         return view
     }
