@@ -1,0 +1,12 @@
+package com.webskitters.webskitters_machine_test.view.activity
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.webskitters.webskitters_machine_test.R
+
+class HomeActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_home)
+    }
+}

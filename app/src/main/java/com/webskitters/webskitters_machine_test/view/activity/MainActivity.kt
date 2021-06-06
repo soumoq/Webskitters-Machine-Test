@@ -1,15 +1,18 @@
-package com.webskitters.webskitters_machine_test
+package com.webskitters.webskitters_machine_test.view.activity
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.viewpager.widget.ViewPager
+import com.webskitters.webskitters_machine_test.R
+import com.webskitters.webskitters_machine_test.view.adapter.SliderAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -36,7 +39,11 @@ class MainActivity : AppCompatActivity() {
             override fun onPageScrollStateChanged(state: Int) {
             }
 
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
             }
 
             override fun onPageSelected(position: Int) {
@@ -64,7 +71,9 @@ class MainActivity : AppCompatActivity() {
         }
         btn_next.setOnClickListener {
             if (CURRENT_SLIDE == TOTAL_SLIDE - 1) {
-                finish()
+                val intent = Intent(this, HomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
             } else {
                 view_pager.currentItem = CURRENT_SLIDE + 1
             }
@@ -76,7 +85,8 @@ class MainActivity : AppCompatActivity() {
      */
     private fun changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= 21) {
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            window.decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)

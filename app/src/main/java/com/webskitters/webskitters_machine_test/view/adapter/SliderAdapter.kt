@@ -1,10 +1,11 @@
-package com.webskitters.webskitters_machine_test
+package com.webskitters.webskitters_machine_test.view.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
+import com.webskitters.webskitters_machine_test.R
 import kotlinx.android.synthetic.main.layout_slide.view.*
 
 
