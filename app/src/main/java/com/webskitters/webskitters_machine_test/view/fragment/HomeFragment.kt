@@ -44,13 +44,8 @@ class HomeFragment : Fragment() {
                 imageListAdapter.updateData(it_list)
                 imageListAdapter.notifyDataSetChanged()
 
-                view.home_search_edit_text.addTextChangedListener(object : TextWatcher {
-                    override fun beforeTextChanged(
-                        s: CharSequence,
-                        start: Int,
-                        count: Int,
-                        after: Int
-                    ) {
+                view.home_search_edit_text.addTextChangedListener(object : TextWatcher { override fun beforeTextChanged(
+                        s: CharSequence, start: Int, count: Int, after: Int) {
                         val length: Int = view.home_search_edit_text.length()
                         if (length >= 3) {
                             val searchRes = ArrayList<ImageModel>()
