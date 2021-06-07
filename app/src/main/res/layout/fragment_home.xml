@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
         android:layout_marginTop="10dp">
 
         <TextView
@@ -17,7 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="13dp"
-            android:text="1"
+            android:text="0"
+            android:visibility="invisible"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -26,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="13dp"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:layout_marginRight="13dp"
             android:background="@drawable/carve_back_ground_et">
