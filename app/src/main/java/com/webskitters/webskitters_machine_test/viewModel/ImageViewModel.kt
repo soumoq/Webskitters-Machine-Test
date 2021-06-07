@@ -1,15 +1,15 @@
 package com.webskitters.webskitters_machine_test.viewModel
 
-import ImageModel
 import android.content.Context
+import retrofit2.Call
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.webskitters.webskitters_machine_test.model.ImageModel
 import com.webskitters.webskitters_machine_test.retrofit.ImageService
 import com.webskitters.webskitters_machine_test.retrofit.RestApiServiceBuilder
 import com.webskitters.webskitters_machine_test.util.toast
 import com.webskitters.webskitters_machine_test.view.dialog.ProgressDialog
-import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 

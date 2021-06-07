@@ -1,6 +1,5 @@
 package com.webskitters.webskitters_machine_test.view.adapter
 
-import ImageModel
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
@@ -11,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.LazyHeaders
 import com.webskitters.webskitters_machine_test.R
+import com.webskitters.webskitters_machine_test.model.ImageModel
 import com.webskitters.webskitters_machine_test.util.ImpFun
 import com.webskitters.webskitters_machine_test.util.loadImage
 import com.webskitters.webskitters_machine_test.util.toast
@@ -78,4 +78,7 @@ class ImageListAdapter(context: Context, homeFragment: HomeFragment) : RecyclerV
             }
         }
     }
+
+
+
 }

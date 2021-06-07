@@ -7,12 +7,9 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.webskitters.webskitters_machine_test.R
-import com.webskitters.webskitters_machine_test.util.toast
-import com.webskitters.webskitters_machine_test.viewModel.ImageViewModel
 
 class HomeActivity : AppCompatActivity() {
 
-    var imageViewModel : ImageViewModel?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,15 +21,11 @@ class HomeActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
         //NavigationUI.setupActionBarWithNavController(this, navController)
 
-        imageViewModel = ViewModelProvider(this).get(ImageViewModel::class.java)
-        imageViewModel?.getImage(this)
+
 
     }
 
-    @JvmName("getImageViewModel1")
-    fun getImageViewModel(): ImageViewModel? {
-        return imageViewModel
-    }
+
 
 
 }
