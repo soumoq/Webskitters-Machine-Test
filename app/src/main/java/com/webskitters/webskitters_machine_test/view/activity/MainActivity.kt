@@ -1,9 +1,11 @@
 package com.webskitters.webskitters_machine_test.view.activity
 
+import android.Manifest
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.text.Html
 import android.view.View
 import android.view.WindowManager
@@ -14,8 +16,10 @@ import androidx.viewpager.widget.ViewPager
 import com.webskitters.webskitters_machine_test.R
 import com.webskitters.webskitters_machine_test.view.adapter.SliderAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import pub.devrel.easypermissions.AppSettingsDialog
+import pub.devrel.easypermissions.EasyPermissions
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
     companion object {
         const val TOTAL_SLIDE = 4
@@ -52,32 +56,52 @@ class MainActivity : AppCompatActivity() {
 
                 when (position) {
                     0 -> {
-                        btn_prev.visibility = View.INVISIBLE
+                        //btn_prev.visibility = View.INVISIBLE
                     }
                     TOTAL_SLIDE - 1 -> {
-                        btn_next.text = getString(R.string.finish)
+                        btn_next.visibility = View.VISIBLE
+                        btn_skip.visibility = View.INVISIBLE
+                        btn_next.setOnClickListener {
+                            val intent = Intent(this@MainActivity, HomeActivity::class.java)
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(intent)
+                        }
+
                     }
                     else -> {
-                        btn_prev.visibility = View.VISIBLE
-                        btn_next.text = getString(R.string.next)
+                        //btn_prev.visibility = View.VISIBLE
+                        //btn_next.text = getString(R.string.next)
                     }
                 }
             }
         }
         view_pager.addOnPageChangeListener(viewPagerPageChangeListener)
 
-        btn_prev.setOnClickListener {
-            view_pager.currentItem = CURRENT_SLIDE - 1
+        btn_skip.setOnClickListener {
+            val intent = Intent(this@MainActivity, HomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
         }
-        btn_next.setOnClickListener {
-            if (CURRENT_SLIDE == TOTAL_SLIDE - 1) {
-                val intent = Intent(this, HomeActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-            } else {
-                view_pager.currentItem = CURRENT_SLIDE + 1
-            }
+
+        val perms = arrayOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+
+        if (EasyPermissions.hasPermissions(this, *perms)) {
+            // we used the postDelayed(Runnable, time) method
+            // to send a message with a delayed time.
+        } else {
+            EasyPermissions.requestPermissions(
+                this,
+                "This permission needed for access directory",
+                123,
+                *perms
+            )
         }
+
+
     }
 
     /**
@@ -111,6 +135,31 @@ class MainActivity : AppCompatActivity() {
 
         if (dots.size > 0)
             dots[currentPage].setTextColor(colorsActive[currentPage])
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String?>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: List<String?>) {
+
+    }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: List<String?>) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            AppSettingsDialog.Builder(this).build().show()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {
+        }
     }
 
 }
