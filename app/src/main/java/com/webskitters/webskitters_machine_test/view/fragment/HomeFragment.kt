@@ -47,7 +47,7 @@ class HomeFragment : Fragment() {
                             val searchRes = ArrayList<ImageModel>()
                             if (view.home_search_edit_text.text.toString().isNotEmpty()) {
                                 for (i in 0 until it_list.size) {
-                                    if (it_list[i].title.contains(view.home_search_edit_text.text.toString())) {
+                                    if (it_list[i].title.toLowerCase().contains(view.home_search_edit_text.text.toString().toLowerCase())) {
                                         searchRes.add(it_list[i])
                                     }
                                 }

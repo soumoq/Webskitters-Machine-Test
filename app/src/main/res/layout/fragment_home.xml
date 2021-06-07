@@ -28,6 +28,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="13dp"
             android:layout_weight="1"
+            android:layout_marginRight="13dp"
             android:background="@drawable/carve_back_ground_et">
 
             <EditText
@@ -37,7 +38,6 @@
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="13sp"
                 android:background="@null"
                 android:hint="Search"
                 android:imeOptions="actionSearch"
