@@ -26,11 +26,12 @@
         android:alpha=".5"
         android:background="@android:color/white" />
 
-    <Button
+    <TextView
         android:id="@+id/btn_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_marginBottom="10dp"
         android:layout_alignParentBottom="true"
         android:background="@null"
         android:fontFamily="serif"
@@ -39,13 +40,14 @@
         android:text="@string/next"
         android:textColor="@android:color/white" />
 
-    <Button
+    <TextView
         android:id="@+id/btn_skip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:fontFamily="serif"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:text="@string/skip"
         android:textColor="@android:color/white" />

@@ -22,6 +22,8 @@ import com.example.roomexample.data.User
 import com.example.roomexample.data.UserViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.webskitters.webskitters_machine_test.R
+import com.webskitters.webskitters_machine_test.util.ImpFun
+import com.webskitters.webskitters_machine_test.util.loadImage
 import com.webskitters.webskitters_machine_test.util.toast
 import kotlinx.android.synthetic.main.buttom_sheet.view.*
 
@@ -33,7 +35,7 @@ class InputBottomSheet : BottomSheetDialogFragment() {
     var user_phone: EditText? = null
     var user_address: EditText? = null
 
-    val imageUrl = "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
+    var imageUrl = "https://homepages.cae.wisc.edu/~ece533/images/airplane.png"
     val PICK_PHOTO_FOR_AVATAR = 1
 
 
@@ -46,7 +48,7 @@ class InputBottomSheet : BottomSheetDialogFragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.buttom_sheet, container, false)
 
-        view.bottom_sheet_title.text = "Insert"
+        view.bottom_sheet_title.text = "Insert User Details"
 
         user_name = view.user_name
         user_email = view.user_email
@@ -55,6 +57,7 @@ class InputBottomSheet : BottomSheetDialogFragment() {
 
         mUserViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
+        view.insert.text = "Insert"
         view.insert.setOnClickListener {
             insertDataToDatabase()
         }
@@ -123,13 +126,9 @@ class InputBottomSheet : BottomSheetDialogFragment() {
             try {
                 val bundle = data?.extras
                 val bitmap = bundle!!.getParcelable<Bitmap>("data")
-                val imageUri: Uri? = data.data
+                imageUrl = ImpFun.getImageUri(requireContext(),bitmap!!).toString()
+                view?.user_profile_image_select!!.loadImage(imageUrl)
 
-                Glide.with(context!!)
-                    .asBitmap()
-                    .load(bitmap)
-                    .error(R.drawable.ic_baseline_error_outline_24)
-                    .into(view?.user_profile_image_select!!)
 
             } catch (e: Exception) {
                 e.printStackTrace()
