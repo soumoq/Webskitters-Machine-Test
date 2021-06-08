@@ -18,12 +18,13 @@ import com.webskitters.webskitters_machine_test.view.fragment.HomeFragment
 import kotlinx.android.synthetic.main.recycler_image_list.view.*
 
 
-class ImageListAdapter(context: Context, homeFragment: HomeFragment) : RecyclerView.Adapter<ImageListAdapter.ViewHolder>() {
+class ImageListAdapter(context: Context, homeFragment: HomeFragment) :
+    RecyclerView.Adapter<ImageListAdapter.ViewHolder>() {
     val context = context
     val homeFragment = homeFragment
 
     private var images: ArrayList<ImageModel> = ArrayList()
-    private var selectedPos : Int = RecyclerView.NO_POSITION
+    private var selectedPos: Int = RecyclerView.NO_POSITION
 
     fun updateData(image: List<ImageModel>) {
         this.images.clear()
@@ -44,14 +45,13 @@ class ImageListAdapter(context: Context, homeFragment: HomeFragment) : RecyclerV
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(images[position],position,homeFragment)
+        holder.bind(images[position], position, homeFragment)
     }
 
     override fun getItemCount() = images.size
 
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
-        var check = true
 
         @SuppressLint("SetTextI18n")
         fun bind(imageInfo: ImageModel, position: Int, homeFragment: HomeFragment) {
@@ -64,21 +64,27 @@ class ImageListAdapter(context: Context, homeFragment: HomeFragment) : RecyclerV
             )
             view.image_list_thumbnail.loadImage(url)
 
+            if (imageInfo.check) {
+                view.recycler_image_root.setBackgroundResource(R.drawable.select_back_ground)
+            } else {
+                view.recycler_image_root.setBackgroundResource(R.drawable.deselect_back_ground)
+            }
+
             view.recycler_image_root.setOnClickListener {
-                if (check){
-                    check = false
-                    view.recycler_image_root.setBackgroundResource(R.drawable.select_back_ground)
-                    homeFragment.selectRecycler(check)
-                }else{
-                    check = true
+                if (imageInfo.check) {
+                    imageInfo.check = false
                     view.recycler_image_root.setBackgroundResource(R.drawable.deselect_back_ground)
-                    homeFragment.selectRecycler(check)
+                    homeFragment.selectRecycler(imageInfo.check)
+                } else {
+                    imageInfo.check = true
+                    view.recycler_image_root.setBackgroundResource(R.drawable.select_back_ground)
+                    homeFragment.selectRecycler(imageInfo.check)
                 }
 
             }
 
-            }
         }
     }
+}
 
 

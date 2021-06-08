@@ -9,5 +9,5 @@ data class ImageModel (
     @SerializedName("title") val title : String,
     @SerializedName("url") val url : String,
     @SerializedName("thumbnailUrl") val thumbnailUrl : String,
-    val check : Boolean
+    var check : Boolean = false
 )

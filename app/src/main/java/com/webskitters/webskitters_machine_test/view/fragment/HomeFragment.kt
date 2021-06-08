@@ -85,7 +85,7 @@ class HomeFragment : Fragment() {
 
 
             } else {
-                context!!.toast("Item not found")
+                requireContext().toast("Item not found")
             }
         })
 
@@ -96,10 +96,11 @@ class HomeFragment : Fragment() {
     var count = 0
     fun selectRecycler(check: Boolean) {
         if (check) {
-            --count;
-            home_item_count?.text = count.toString()
-        } else {
             ++count
+            home_item_count?.text = count.toString()
+
+        } else {
+            --count;
             home_item_count?.text = count.toString()
         }
 
