@@ -76,9 +76,9 @@ class ImageListAdapter(context: Context, homeFragment: HomeFragment) : RecyclerV
                 }
 
             }
+
+            }
         }
     }
 
 
-
-}

@@ -17,6 +17,15 @@ fun ImageView.loadImage(uri: GlideUrl) {
         .into(this)
 }
 
+fun ImageView.loadImage(string: String) {
+    val options = RequestOptions()
+        .error(R.drawable.ic_baseline_error_outline_24)
+    Glide.with(this.context)
+        .setDefaultRequestOptions(options)
+        .load(string)
+        .into(this)
+}
+
 
 fun Context.toast(message: String, duration: Int = Toast.LENGTH_LONG) {
     Toast.makeText(this, message, duration).show()

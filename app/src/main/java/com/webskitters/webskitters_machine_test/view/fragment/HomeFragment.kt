@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-
+        home_item_count = view.home_item_count
 
         val imageViewModel = ViewModelProvider(this).get(ImageViewModel::class.java)
         imageViewModel.getImage(context!!)
@@ -47,28 +47,30 @@ class HomeFragment : Fragment() {
                 imageListAdapter.updateData(it_list)
                 imageListAdapter.notifyDataSetChanged()
 
-                view.home_search_edit_text.addTextChangedListener(object : TextWatcher { override fun beforeTextChanged(
-                    s: CharSequence, start: Int, count: Int, after: Int) {
-                    val length: Int = view.home_search_edit_text.length()
-                    if (length >= 3) {
-                        val searchRes = ArrayList<ImageModel>()
-                        if (view.home_search_edit_text.text.toString().isNotEmpty()) {
-                            for (i in 0 until it_list.size) {
-                                if (it_list[i].title.toLowerCase().contains(
-                                        view.home_search_edit_text.text.toString().toLowerCase()
-                                    )
-                                ) {
-                                    searchRes.add(it_list[i])
+                view.home_search_edit_text.addTextChangedListener(object : TextWatcher {
+                    override fun beforeTextChanged(
+                        s: CharSequence, start: Int, count: Int, after: Int
+                    ) {
+                        val length: Int = view.home_search_edit_text.length()
+                        if (length >= 3) {
+                            val searchRes = ArrayList<ImageModel>()
+                            if (view.home_search_edit_text.text.toString().isNotEmpty()) {
+                                for (i in 0 until it_list.size) {
+                                    if (it_list[i].title.toLowerCase().contains(
+                                            view.home_search_edit_text.text.toString().toLowerCase()
+                                        )
+                                    ) {
+                                        searchRes.add(it_list[i])
+                                    }
                                 }
+                                imageListAdapter.updateData(searchRes)
+                                imageListAdapter.notifyDataSetChanged()
                             }
-                            imageListAdapter.updateData(searchRes)
+                        } else if (length < 3) {
+                            imageListAdapter.updateData(it_list)
                             imageListAdapter.notifyDataSetChanged()
                         }
-                    } else if (length < 3) {
-                        imageListAdapter.updateData(it_list)
-                        imageListAdapter.notifyDataSetChanged()
                     }
-                }
 
                     override fun onTextChanged(
                         s: CharSequence,

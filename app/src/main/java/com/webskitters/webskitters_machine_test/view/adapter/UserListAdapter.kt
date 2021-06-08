@@ -9,11 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.example.roomexample.data.User
 import com.webskitters.webskitters_machine_test.R
+import com.webskitters.webskitters_machine_test.util.loadImage
+import com.webskitters.webskitters_machine_test.view.fragment.AccountFragment
 import kotlinx.android.synthetic.main.recycler_user_list.view.*
 
 
-class UserListAdapter(context: Context) : RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
+class UserListAdapter(context: Context, accountFragment: AccountFragment) : RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
     val context = context
+    val accountFragment = accountFragment
 
     private var userList: ArrayList<User> = ArrayList()
 
@@ -36,7 +39,7 @@ class UserListAdapter(context: Context) : RecyclerView.Adapter<UserListAdapter.V
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(userList[position])
+        holder.bind(userList[position],accountFragment)
     }
 
     override fun getItemCount() = userList.size
@@ -44,18 +47,19 @@ class UserListAdapter(context: Context) : RecyclerView.Adapter<UserListAdapter.V
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
         @SuppressLint("SetTextI18n")
-        fun bind(user: User) {
-            view.recycler_user_name.text = user.name
-            view.recycler_user_email.text = user.email
-            view.recycler_user_phone.text = user.phone
-            view.recycler_user_address.text = user.address
+        fun bind(user: User, accountFragment: AccountFragment) {
+            view.recycler_user_name.text = "Name : ${user.name}"
+            view.recycler_user_email.text = "Email : ${user.email}"
+            view.recycler_user_phone.text = "Phone : ${user.phone}"
+            view.recycler_user_address.text = "Address : ${user.address}"
+            view.user_profile_image.loadImage(user.image)
 
             view.custom_row_root.setOnClickListener {
-                //(view.context as MainActivity).startUpdateSheet(user)
+                accountFragment.startUpdateSheet(user)
             }
 
             view.custom_row_root.setOnLongClickListener {
-                //(view.context as MainActivity).startDeleteDialog(user)
+                accountFragment.startDeleteDialog(user)
                 true
             }
         }
